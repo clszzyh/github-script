@@ -5012,6 +5012,7 @@ process.on('unhandledRejection', handleError);
 main().catch(handleError);
 async function main() {
     const token = Object(core.getInput)('github-token', { required: true });
+    const personal_token = Object(core.getInput)('personal-token', { required: true });
     const debug = Object(core.getInput)('debug');
     const userAgent = Object(core.getInput)('user-agent');
     const previews = Object(core.getInput)('previews');
@@ -5023,9 +5024,10 @@ async function main() {
     if (previews != null)
         opts.previews = previews.split(',');
     const github = Object(lib_github.getOctokit)(token, opts);
+    const personal_github = Object(lib_github.getOctokit)(personal_token, opts);
     const script = Object(core.getInput)('script', { required: true });
     // Using property/value shorthand on `require` (e.g. `{require}`) causes compilation errors.
-    const result = await callAsyncFunction({ require: __webpack_require__(875), github, context: lib_github.context, core: core, io: io }, script);
+    const result = await callAsyncFunction({ require: __webpack_require__(875), github, personal_github, context: lib_github.context, core: core, io: io }, script);
     let encoding = Object(core.getInput)('result-encoding');
     encoding = encoding ? encoding : 'json';
     let output;

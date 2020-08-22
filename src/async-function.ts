@@ -9,6 +9,7 @@ type AsyncFunctionArguments = {
   context: Context
   core: typeof core
   github: InstanceType<typeof GitHub>
+  personal_github: InstanceType<typeof GitHub>
   io: typeof io
   require: NodeRequire
 }
